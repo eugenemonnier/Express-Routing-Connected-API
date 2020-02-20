@@ -1,0 +1,39 @@
+{
+  "name": "express-routing-connected-api",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test-watch": "jest --watchAll --coverage",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenemonnier/Express-Routing-Connected-API.git"
+  },
+  "author": "Eugene Monnier",
+  "license": "ISC",
+  "devDependencies": {
+    "@code-fellows/supergoose": "^1.0.1",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
+  },
+  "standard": {
+    "env": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.1",
+    "morgan": "^1.9.1"
+  },
+  "bugs": {
+    "url": "https://github.com/eugenemonnier/Express-Routing-Connected-API/issues"
+  },
+  "homepage": "https://github.com/eugenemonnier/Express-Routing-Connected-API#readme"
+}
