@@ -13,14 +13,14 @@ describe('Genres model', () => {
       })
       .then(results => {
         return genres.read(results)
-          .then(results => expect(results[0].name.toBe('R & B')))
+          .then(results => expect(results[0].name).toBe('R & B'))
       })
   })
 
   test('read back all entries', () => {
     return genres.read()
       .then(results => {
-        expect(results.length).toBe(5)
+        expect(results.length).toBe(1)
       })
   })
 

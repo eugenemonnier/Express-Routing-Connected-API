@@ -2,7 +2,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const { handleGetAll, handleGetOne, handleGetOneArtist, handlePost, handleEdit, handleDestroy, getModel } = require('./lib/routeGenerators')
+const { handleGet, handleGetOneArtist, handlePost, handleEdit, handleDestroy, getModel } = require('./lib/routeGenerators')
 
 // middleware
 const app = express()
@@ -12,8 +12,8 @@ app.use(cors())
 
 // routes
 app.param('model', getModel)
-app.get('/api/v1/:model', handleGetAll)
-app.get('/api/v1/:model/:id', handleGetOne)
+app.get('/api/v1/:model', handleGet)
+app.get('/api/v1/:model/:id', handleGet)
 app.get('/api/v1/:model/:id/albums', handleGetOneArtist)
 app.post('/api/v1/:model', handlePost)
 app.put('/api/v1/:model/:id', handleEdit)

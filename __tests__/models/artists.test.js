@@ -1,8 +1,6 @@
 const Artists = require('../../src/models/artists')
-const Albums = require('../../src/models/albums')
 require('@code-fellows/supergoose')
 
-const albums = new Albums()
 const artists = new Artists()
 
 describe('Artists model', () => {
@@ -15,31 +13,24 @@ describe('Artists model', () => {
       })
       .then(results => {
         return artists.read(results)
-          .then(results => expect(results[0].name.toBe('Beyonce')))
+          .then(results => expect(results[0].name).toBe('Beyonce'))
       })
   })
 
   test('read back all entries', () => {
     return artists.read()
       .then(results => {
-        expect(results.length).toBe(5)
+        expect(results.length).toBe(1)
       })
   })
 
-  test('able to update an artist and read back an artist\'s album', () => {
+  test('able to update an artist', () => {
     const testArtist = { name: 'Beyonce' }
-    let artistId = ''
     return artists.create(testArtist)
+      .then(results => { return results._id })
       .then(results => {
-        artistId = results._id
-        return artistId
-      })
-      .then(results => {
-        return albums.create({ artist: results._id, name: 'Lemonade' })
-          .then(results => {
-            return artists.update(artistId, { name: 'Beyonce', albums: results._id })
-              .then(results => expect(results.albums.name).toBe('Lemonade'))
-          })
+        return artists.update(results._id, { name: 'Queen B' })
+          .then(results => expect(results.name).toBe('Queen B'))
       })
   })
 

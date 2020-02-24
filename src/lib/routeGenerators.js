@@ -26,21 +26,15 @@ function getModel (req, res, next) {
   }
 }
 
-function handleGetAll (req, res, next) {
-  req.model.read()
+function handleGet (req, res, next) {
+  const input = req.params.id ? req.params.id : ''
+  req.model.read(input)
     .then(results => {
       const output = {
         count: results.length,
         data: results
       }
       res.status(200).json(output)
-    })
-}
-
-function handleGetOne (req, res, next) {
-  req.model.read(req.params.id)
-    .then(data => {
-      res.status(200).json(data)
     })
     .catch(next)
 }
@@ -55,13 +49,16 @@ function handleGetOneArtist (req, res, next) {
 }
 
 function handlePost (req, res, next) {
+  if (!req.body) throw new Error('Missing body.')
   req.model.create(req.body)
     .then(result => {
       res.status(201).json(result)
     })
+    .catch(next)
 }
 
 function handleEdit (req, res, next) {
+  if (!req.params.id || !req.body) throw new Error('Missing required input(s).')
   req.model.update(req.params.id, req.body)
     .then(result => {
       res.status(200).json(result)
@@ -70,6 +67,7 @@ function handleEdit (req, res, next) {
 }
 
 function handleDestroy (req, res, next) {
+  if (!req.params.id) throw new Error('Missing ID.')
   req.model.delete(req.params.id)
     .then(result => {
       res.status(202).json(result)
@@ -78,8 +76,7 @@ function handleDestroy (req, res, next) {
 }
 
 module.exports = {
-  handleGetAll,
-  handleGetOne,
+  handleGet,
   handleGetOneArtist,
   handlePost,
   handleEdit,

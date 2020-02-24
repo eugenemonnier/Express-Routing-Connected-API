@@ -5,43 +5,43 @@ const albums = new Albums()
 
 describe('Albums model', () => {
   test('create a new album entry & get return that album', () => {
-    const testAlbum = { name: 'Lemonade' }
+    const testAlbum = { title: 'Lemonade' }
     return albums.create(testAlbum)
       .then(results => {
-        expect(results.name).toBe('Lemonade')
+        expect(results.title).toBe('Lemonade')
         return results._id
       })
       .then(results => {
         return albums.read(results)
-          .then(results => expect(results[0].name.toBe('Lemonade')))
+          .then(results => expect(results[0].title).toBe('Lemonade'))
       })
   })
 
   test('read back all entries', () => {
     return albums.read()
       .then(results => {
-        expect(results.length).toBe(5)
+        expect(results.length).toBe(1)
       })
   })
 
   test('able to update an album', () => {
-    const testAlbum = { name: 'Lemonade' }
+    const testAlbum = { title: 'Lemonade' }
     return albums.create(testAlbum)
       .then(results => { return results._id })
       .then(results => {
-        return albums.update(results._id, { name: 'Revolution' })
-          .then(results => expect(results.name).toBe('Revolution'))
+        return albums.update(results._id, { title: 'Revolution' })
+          .then(results => expect(results.title).toBe('Revolution'))
       })
   })
 
   test('able to delete an album', () => {
-    const deleteThisAlbum = { name: 'My Own Prison' }
+    const deleteThisAlbum = { title: 'My Own Prison' }
     return albums.create(deleteThisAlbum)
       .then(results => { return results._id })
       .then(results => {
         return albums.delete(results._id)
           .then(results => {
-            expect(results.name).toBe('My Own Prison')
+            expect(results.title).toBe('My Own Prison')
           })
       })
   })
