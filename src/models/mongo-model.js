@@ -4,7 +4,7 @@ class Model {
   }
 
   create (record) {
-    const newRecord = new this.schema (record)
+    const newRecord = new this.schema(record)
     return newRecord.save()
   }
 
@@ -14,7 +14,7 @@ class Model {
   }
 
   update (id, record) {
-    return this.schema.findByIdAndUpdate(id, record)
+    return this.schema.findByIdAndUpdate(id, record, { new: true })
   }
 
   delete (id) {
